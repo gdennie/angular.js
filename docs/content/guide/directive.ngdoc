@@ -178,8 +178,9 @@ First let's talk about the API for registering directives. Much like controllers
 registered on modules. To register a directive, you use the `module.directive` API.
 `module.directive` takes the
 {@link guide/directive#creating-custom-directives_matching-directives normalized} directive name
-followed by a **factory function.** This factory function should return an object with the different
-options to tell `$compile` how the directive should behave when matched.
+followed by a **factory function.** This factory function should return an 
+{@link api/ng.$compile#description_comprehensive-directive-api object}
+with the various options directing `$compile` how to construct each occurrence of the directive.
 
 
 The factory function is invoked only once when the
