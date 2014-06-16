@@ -8,6 +8,7 @@
  * @description
  * Selects a subset of items from `array` and returns it as a new array.
  *
+ * @param {string} filter_expression The ng-repeat iterator expression of the form 'for item in array'
  * @param {Array} array The source array.
  * @param {string|Object|function()} expression The predicate to be used for selecting items from
  *   `array`.
