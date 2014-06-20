@@ -349,28 +349,30 @@ function annotate(fn, strictDi, name) {
  * @description
  *
  * Register a **provider function** with the {@link auto.$injector $injector}. Provider functions
- * are constructor functions, whose instances are responsible for "providing" a factory for a
- * service.
+ * are constructor functions, whose instances contain a $get() method that returns a "factory" function for
+ * creating the instance of the service (which may be an object or a function). Providers allow service factories
+ * and therefore, services, to be configured during angular's configuration phase.
  *
- * Service provider names start with the name of the service they provide followed by `Provider`.
+ * A service provider name is the concatenation of the service's name and the word `Provider`.
  * For example, the {@link ng.$log $log} service has a provider called
  * {@link ng.$logProvider $logProvider}.
  *
- * Service provider objects can have additional methods which allow configuration of the provider
- * and its service. Importantly, you can configure what kind of service is created by the `$get`
- * method, or how that service will act. For example, the {@link ng.$logProvider $logProvider} has a
+ * A part from $get, a service provider instance can have additional methods and properties to allow configuration of the provider
+ * and its service in the angular configuration function during application initialization. 
+ * Importantly, you can configure what kind of service is created by the `$get`
+ * method by setting values relied on by the factory or even assign a new factory method to $get. 
+ * For example, the {@link ng.$logProvider $logProvider} has a
  * method {@link ng.$logProvider#debugEnabled debugEnabled}
  * which lets you specify whether the {@link ng.$log $log} service will log debug messages to the
  * console or not.
  *
- * @param {string} name The name of the instance. NOTE: the provider will be available under `name +
-                        'Provider'` key.
+ * @param {string} name The name of the instance. NOTE: the provider will be available under `name + 'Provider'` key.
  * @param {(Object|function())} provider If the provider is:
  *
  *   - `Object`: then it should have a `$get` method. The `$get` method will be invoked using
  *     {@link auto.$injector#invoke $injector.invoke()} when an instance needs to be created.
  *   - `Constructor`: a new instance of the provider will be created using
- *     {@link auto.$injector#instantiate $injector.instantiate()}, then treated as `object`.
+ *     {@link auto.$injector#instantiate $injector.instantiate()}, then treated as an `object`.
  *
  * @returns {Object} registered provider instance
 
